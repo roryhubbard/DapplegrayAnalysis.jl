@@ -33,7 +33,7 @@ function test_simulate()
     fps = 1000
     anim = Animation(vis, fps=fps)
     for (tt, uu) in zip(sol.t, sol.u)
-        frame = floor(Int, tt * fps)
+        frame = round(Int, tt * fps)
         atframe(anim, frame) do
             q = expm((π - uu[1]) * @SVector [1,0,0])
             settransform!(vis["geom"], LinearMap(QuatRotation(q)))
