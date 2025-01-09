@@ -1,7 +1,5 @@
 module DapplegrayTest
 
-export test_simulate
-
 using Colors: RGBA, RGB, @colorant_str
 using StaticArrays: @SVector
 using Rotations: QuatRotation, expm, RotX
@@ -12,6 +10,8 @@ using MeshCat: Visualizer, setobject!, MeshPhongMaterial, setanimation!,
                settransform!, Animation, atframe
 
 using DapplegrayDynamics: pendulum, simulate_pendulum
+
+export test_simulate
 
 # Pendulum
 function _set_mesh!(vis, length)
