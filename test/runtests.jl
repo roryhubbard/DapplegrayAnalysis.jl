@@ -1,6 +1,6 @@
-using DapplegrayTest
+using DapplegrayAnalysis
 using Test
 
-@testset "DapplegrayTest.jl" begin
+@testset "DapplegrayAnalysis.jl" begin
     # Write your tests here.
 end

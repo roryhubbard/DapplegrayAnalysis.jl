@@ -1,4 +1,4 @@
-module DapplegrayTest
+module DapplegrayAnalysis
 
 using Colors
 using CoordinateTransformations
