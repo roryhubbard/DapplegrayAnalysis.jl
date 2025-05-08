@@ -24,6 +24,7 @@ RobotDynamics = "0.4"
 RobotZoo = "0.3"
 Rotations = "1.7"
 StaticArrays = "1.9"
+TrajectoryOptimization = "0.7"
 julia = "1.11"
 
 [extras]
