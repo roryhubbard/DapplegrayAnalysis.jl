@@ -25,13 +25,21 @@ function kj()
 
     discrete_trajectory = DD.primal(sqp_solver)
     ts = DD.time(discrete_trajectory)
-    qs = DD.knotpoints(discrete_trajectory)
+    qs = DD.position_trajectory(discrete_trajectory)
+    print("position")
+    println(qs)
+    vs = DD.velocity_trajectory(discrete_trajectory)
+    print("velocity")
+    println(vs)
+    us = DD.control_trajectory(discrete_trajectory)
+    print("control")
+    println(us)
 
     vis = Visualizer()
-#    open(vis)
     mvis = MechanismVisualizer(mechanism, URDFVisuals(urdf), vis)
     animation = Animation(mvis, ts, qs)
     setanimation!(mvis, animation)
+    open(vis)
 end
 
 end
