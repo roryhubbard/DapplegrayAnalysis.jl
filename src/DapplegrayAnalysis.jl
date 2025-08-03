@@ -20,8 +20,8 @@ end
 
 function kj()
     urdf = get_acrobot_urdf()
-    mechanism = parse_urdf(urdf)
-    sqp_solver = DD.acrobot_swingup(mechanism)
+    mechanism = parse_urdf(urdf, gravity=SVector(0.0, 0.0, -9.81))
+    sqp_solver = DD.acrobot_swingup(mechanism, 50, 10.0)
 
     discrete_trajectory = DD.primal(sqp_solver)
     ts = DD.time(discrete_trajectory)
