@@ -2,7 +2,6 @@ module DapplegrayAnalysis
 
 using DapplegrayDynamics
 import DapplegrayDynamics as DD
-using Colors
 using CoordinateTransformations
 using GeometryBasics
 using MeshCat
