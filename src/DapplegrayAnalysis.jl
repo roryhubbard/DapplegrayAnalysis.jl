@@ -53,7 +53,7 @@ function jf()
     mechanism = parse_urdf(urdf, gravity=SVector(0.0, 0.0, -9.81))
 
     # Run the optimization
-    result = DD.pendulum_swingup_nlopt(mechanism, 51, 10.0, 10)
+    result = DD.pendulum_swingup_nlopt(mechanism, 51, 10.0, 100)
 
     # Get the discrete trajectory from the result
     discrete_trajectory = result.solution
@@ -135,7 +135,7 @@ end
 
 function nl()
     mechanism = DD.load_pendulum()
-    result = DD.pendulum_swingup_nlopt(mechanism, 51, 10.0, 10)
+    result = DD.pendulum_swingup_nlopt(mechanism, 51, 10.0, 100)
     plot_pendulum_iterations(result.primal_solutions)
     result
 end
