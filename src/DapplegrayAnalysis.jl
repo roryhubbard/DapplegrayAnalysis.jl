@@ -142,7 +142,7 @@ end
 
 function kj()
     mechanism = DD.load_pendulum()
-    solver = DD.pendulum_swingup(mechanism, 51, 10.0)
+    solver = DD.pendulum_swingup(mechanism, 51, 10.0, 10)
 
     println(
         "********************************** PRINT GUTS **********************************",
