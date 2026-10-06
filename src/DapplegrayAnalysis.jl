@@ -10,7 +10,7 @@ using MeshCatMechanisms
 using Rotations
 using StaticArrays
 
-export fj, jf, df, nl, kj, plot_pendulum_iterations
+export fj, jf, df, nl, kj, sqp_noineq, plot_pendulum_iterations, view_pendulum
 
 function load_acrobot()::String
     srcdir = dirname(pathof(DapplegrayAnalysis))
@@ -53,7 +53,7 @@ function jf()
     mechanism = parse_urdf(urdf, gravity=SVector(0.0, 0.0, -9.81))
 
     # Run the optimization
-    result = DD.pendulum_swingup_nlopt(mechanism, 51, 10.0, 100)
+    result = DD.pendulum_swingup_nlopt(mechanism, 11, 10.0, 100)
 
     # Get the discrete trajectory from the result
     discrete_trajectory = result.solution
@@ -142,7 +142,7 @@ end
 
 function kj()
     mechanism = DD.load_pendulum()
-    solver = DD.pendulum_swingup(mechanism, 51, 10.0, 10)
+    solver = DD.pendulum_swingup(mechanism, 3, 10.0, 1)
 
     println(
         "********************************** PRINT GUTS **********************************",
@@ -155,9 +155,29 @@ function kj()
     end
     primal_solutions = solver.guts[:primal]
 
-    plot_pendulum_iterations(primal_solutions)
+#    plot_pendulum_iterations(primal_solutions)N
 
     solver
+end
+
+function sqp_noineq()
+    mechanism = DD.load_pendulum()
+    solver = DD.pendulum_swingup(mechanism, 3, 1.0, 1)
+    primal_solutions = solver.guts[:primal]
+    f_vals = get(solver.guts, :objective, Float64[])
+    println("Objective history: $f_vals")
+    traj = DD.primal(solver)
+    println("Final position: $(last(DD.position_trajectory(traj)))")
+#    plot_pendulum_iterations(primal_solutions)
+    solver
+end
+
+function view_pendulum()
+    urdf = load_pendulum()
+    mechanism = parse_urdf(urdf, gravity=SVector(0.0, 0.0, -9.81))
+    vis = Visualizer()
+    mvis = MechanismVisualizer(mechanism, URDFVisuals(urdf), vis)
+    open(vis)
 end
 
 end
